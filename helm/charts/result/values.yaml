@@ -7,7 +7,7 @@ image:
   repository: manuelnucci/lfs269-result
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: main-cf7ca61b-1686496486 # {"$imagepolicy": "instavote:result:tag" }
+  tag: main-bcf245fd-1686517876 # {"$imagepolicy": "instavote:result:tag" }
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
