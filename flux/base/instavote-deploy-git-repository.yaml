@@ -9,4 +9,4 @@ spec:
     branch: main
   interval: 30s
   secretRef:
-    name: github-instavote
+    name: github-instavote-deploy
