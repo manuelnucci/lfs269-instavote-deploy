@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+commonLabels:
+  project: instavote
+  env: staging
+commonAnnotations:
+  supported-by: "sre@example.com"
+replicas:
+  - name: vote
+    count: 5
+images:
+  - name: schoolofdevops/vote
+    newName: manuelnucci/lfs269-vote
+    newTag: main-92a4549c-1686495923 # {"$imagepolicy": "instavote:vote:tag" }
+configMapGenerator:
+  - name: vote-options
+    envs:
+      - options.env
+patches:
+  - target:
+      kind: Service
+      name: vote
+    patch: |-
+      - op: replace
+        path: /spec/ports/0/nodePort
+        value: 30002

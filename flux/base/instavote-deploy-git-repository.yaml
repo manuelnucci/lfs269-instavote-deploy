@@ -1,0 +1,12 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: instavote-deploy
+  namespace: instavote
+spec:
+  url: https://github.com/manuelnucci/lfs269-instavote-deploy.git
+  ref:
+    branch: main
+  interval: 30s
+  secretRef:
+    name: github-instavote

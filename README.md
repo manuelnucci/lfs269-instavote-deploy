@@ -26,7 +26,7 @@ Manage organisation wide deployments to Kubernetes with FluxCD. This repository 
 - Cluster-wide infrastructure components (e.g. Ingress Controllers, repository Secrets, etc.).
 - Project onboarding configurations AKA tenants spec. This is the spec that would point to a project repository for each tenant, fetch the sync manifests and deploy.
 
-You could call it a **flux-fleet** repository, which is managed typically by the SREs.
+You could call it **flux-fleet** repository, which is managed typically by the SREs.
 
 Who maintains Fleet Repository ==> Site Reliability Engineers / DevOps / Platform Engineers.
 

@@ -1,0 +1,19 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: slack-notifications
+  namespace: instavote
+spec:
+  providerRef:
+    name: slack
+  eventSeverity: info
+  eventSources:
+    - kind: Kustomization
+      name: "*"
+      namespace: instavote
+    - kind: GitRepository
+      name: "*"
+      namespace: instavote
+    - kind: HelmRelease
+      name: "*"
+      namespace: instavote

@@ -1,0 +1,13 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: vote
+  namespace: instavote
+spec:
+  providerRef:
+    name: github-instavote-deploy
+  eventSeverity: info
+  eventSources:
+    - kind: Kustomization
+      name: vote
+      namespace: instavote

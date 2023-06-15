@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - db-helm-release.yaml
+  - db-helm-repository.yaml
+  - flux-monitoring-git-repository.yaml
+  - github-instavote-deploy-provider.yaml
+  - instavote-deploy-git-repository.yaml
+  - kube-prometheus-stack-kustomization.yaml
+  - monitoring-config-kustomization.yaml
+  - redis-alert.yaml
+  - redis-kustomization.yaml
+  - result-helm-release.yaml
+  - result-image-policy.yaml
+  - result-image-repository.yaml
+  - result-image-update-automation.yaml
+  - slack-notifications-alert.yaml
+  - slack-provider.yaml
+  - vote-alert.yaml
+  - vote-image-policy.yaml
+  - vote-image-repository.yaml
+  - vote-image-update-automation.yaml
+  - vote-kustomization.yaml
+  - worker-alert.yaml
+  - worker-kustomization.yaml

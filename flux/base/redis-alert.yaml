@@ -1,0 +1,13 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Alert
+metadata:
+  name: redis
+  namespace: instavote
+spec:
+  providerRef:
+    name: github-instavote-deploy
+  eventSeverity: info
+  eventSources:
+    - kind: Kustomization
+      name: redis
+      namespace: instavote
