@@ -6,7 +6,7 @@ metadata:
 spec:
   sourceRef:
     kind: GitRepository
-    name: instavote
+    name: instavote-deploy
   path: ./kustomize/vote
   targetNamespace: instavote
   dependsOn:
