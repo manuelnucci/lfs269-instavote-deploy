@@ -1,0 +1,69 @@
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: vote
+spec:
+  provider: nginx
+  # Deployment reference
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vote
+  # Ingress reference
+  ingressRef:
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    name: vote
+  # HPA reference (optional)
+  autoscalerRef:
+    apiVersion: autoscaling/v2
+    kind: HorizontalPodAutoscaler
+    name: vote
+  # The maximum time in seconds for the canary deployment
+  # to make progress before it is rollbacked (default to 600s)
+  progressDeadlineSeconds: 60
+  service:
+    # ClusterIP port number
+    port: 80
+    # Container port number or name
+    targetPort: 80
+  analysis:
+    # Schedule interval (default to 60s)
+    interval: 30s
+    # Max number of failed metric checks before rollback
+    threshold: 3
+
+    # --- Enable this for Blue/Green ---
+    # Number of checks to run before rollback
+    # iterations: 5
+    # ---
+
+    # --- Enable this for Canary ---
+    # Max traffic percentage routed to canary (percentage of 0-100)
+    # maxWeight: 50
+    # Canary increment step (percentage of 0-100)
+    # stepWeight: 5
+    # ---
+
+    metrics:
+      - name: error-rate
+        templateRef:
+          name: error-rate
+          namespace: flagger-system
+        thresholdRange:
+          max: 1
+        interval: 30s
+    webhooks:
+      - name: acceptance-test
+        type: pre-rollout
+        url: http://flagger-loadtester.flagger-system/
+        timeout: 30s
+        metadata:
+          type: bash
+          cmd: "curl http://vote-canary.instavote/ | grep choice"
+      - name: load-test
+        url: http://flagger-loadtester.flagger-system/
+        timeout: 5s
+        metadata:
+          # Replace with External/Cluster IP of Ingress
+          cmd: "hey -z 30s -q 10 -c 2 -host vote.example.com http://10.43.167.189"

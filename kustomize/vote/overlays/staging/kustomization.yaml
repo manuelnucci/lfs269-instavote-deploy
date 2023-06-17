@@ -18,3 +18,8 @@ configMapGenerator:
   - name: vote-options
     envs:
       - options.env
+patches:
+  - path: canary_patch.yaml
+    target:
+      kind: Canary
+      name: vote
