@@ -7,7 +7,3 @@ patches:
     target:
       kind: Deployment
       name: vote
-  - path: service_patch.yaml
-    target:
-      kind: Service
-      name: vote

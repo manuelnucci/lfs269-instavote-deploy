@@ -9,7 +9,7 @@ commonAnnotations:
   supported-by: "sre@example.com"
 replicas:
   - name: vote
-    count: 5
+    count: 0
 images:
   - name: schoolofdevops/vote
     newName: manuelnucci/lfs269-vote
@@ -18,11 +18,3 @@ configMapGenerator:
   - name: vote-options
     envs:
       - options.env
-patches:
-  - target:
-      kind: Service
-      name: vote
-    patch: |-
-      - op: replace
-        path: /spec/ports/0/nodePort
-        value: 30002
